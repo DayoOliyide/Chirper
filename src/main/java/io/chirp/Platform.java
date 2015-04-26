@@ -7,7 +7,7 @@ import io.chirp.system.UserManagement;
 import java.util.List;
 
 /**
- *
+ * An interface to represent the Social networking Platform
  */
 public interface Platform
 {

@@ -14,8 +14,8 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 /**
- *
- *
+ * A simple console based social networking application.
+ * It allows users to post messages, read messages and follow each other.
  */
 public class App implements Platform
 {

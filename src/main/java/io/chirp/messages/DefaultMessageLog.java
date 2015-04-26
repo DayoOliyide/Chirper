@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- *
+ * This class represents the all the messages in a sequential log manner.
  */
 public class DefaultMessageLog implements MessageLog
 {
@@ -26,6 +26,10 @@ public class DefaultMessageLog implements MessageLog
     }
 
     @Override
+    /**
+     * This method returns all the messages for the provided users in the order of
+     * the latest message first and the oldest message last. (LIFO)
+     */
     public List<Message> getTimeLine(Set<User> users)
     {
         return mainMessageStream.stream()

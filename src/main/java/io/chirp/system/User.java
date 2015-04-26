@@ -1,7 +1,7 @@
 package io.chirp.system;
 
 /**
- *
+ * A POJO representing a User
  */
 public class User
 {

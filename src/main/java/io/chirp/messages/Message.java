@@ -4,7 +4,7 @@ import io.chirp.system.User;
 
 
 /**
- *
+ * A simple POJO representing a Message
  */
 public class Message
 {

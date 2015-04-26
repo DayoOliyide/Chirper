@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
+ * Test class for the default command parser
  */
 public class DefaultCommandParserTest
 {

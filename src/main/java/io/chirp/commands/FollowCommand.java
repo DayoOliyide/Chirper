@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
+ * This represents the follows command.
  */
 public class FollowCommand implements Command
 {

@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
+ * This class represents the post command.
  */
 public class PostCommand implements Command
 {

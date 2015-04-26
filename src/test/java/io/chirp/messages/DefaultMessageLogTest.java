@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *
+ * Test Class for the default Message Log
  */
 public class DefaultMessageLogTest
 {

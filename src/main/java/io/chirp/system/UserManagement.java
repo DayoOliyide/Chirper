@@ -3,7 +3,7 @@ package io.chirp.system;
 import java.util.Set;
 
 /**
- *
+ * An interface for the application user management
  */
 public interface UserManagement
 {

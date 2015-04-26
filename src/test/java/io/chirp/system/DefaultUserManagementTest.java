@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
+ * Test class for the default user management
  */
 public class DefaultUserManagementTest
 {

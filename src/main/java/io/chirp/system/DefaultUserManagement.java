@@ -3,7 +3,8 @@ package io.chirp.system;
 import java.util.*;
 
 /**
- *
+ * This class represents a simple representation of all the users within the application.
+ * It also tracks all the known subscriptions/followees of a user.
  */
 public class DefaultUserManagement implements UserManagement
 {
