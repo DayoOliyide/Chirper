@@ -16,7 +16,7 @@ public class DefaultMessageLog implements MessageLog
     private List<Message> mainMessageStream = new LinkedList<Message>();
 
     private static Comparator<Message> TIME_LINE_COMPARATOR =
-            (l, r) -> { return Long.compare(r.getCreationTime(), l.getCreationTime());};
+            (l, r) -> Long.compare(r.getCreationTime(), l.getCreationTime());
 
 
     @Override
