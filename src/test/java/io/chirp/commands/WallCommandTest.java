@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.Set;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -21,15 +22,18 @@ public class WallCommandTest
     @Test
     public void testWallCommand()
     {
-        User testUserA = new User("testUserA");
-        User testUserB = new User("testUserB");
-        User testUserC = new User("testUserC");
+        String testUsernameA = "testUserA";
+        User testUserA = new User(testUsernameA);
+        String testUsernameB = "testUserB";
+        User testUserB = new User(testUsernameB);
+        String testUsernameC = "testUserC";
+        User testUserC = new User(testUsernameC);
         Set<User> managementSetResult = new HashSet<>();
         managementSetResult.add(testUserB); managementSetResult.add(testUserC);
         Set<User> timeLineArg = new HashSet<>(managementSetResult);
         timeLineArg.add(testUserA);
 
-        WallCommand wallCommand = new WallCommand("testUserA");
+        WallCommand wallCommand = new WallCommand(testUsernameA);
         App theApp = new App();
 
         //mock userManagement and messageLog
@@ -38,10 +42,13 @@ public class WallCommandTest
         theApp.setUserManagement(mockManagement);
         theApp.setMessageLog(mockMessageLog);
         //stub some methods
-        (when(mockManagement.getOrCreate("testUserA"))).thenReturn(testUserA);
+        (when(mockManagement.getOrCreate(testUsernameA))).thenReturn(testUserA);
         (when(mockManagement.getFollowees(testUserA))).thenReturn(managementSetResult);
         (when(mockMessageLog.getTimeLine(timeLineArg))).thenReturn(new LinkedList<>());
 
         wallCommand.execute(theApp);
+        verify(mockManagement).getOrCreate(testUsernameA);
+        verify(mockManagement).getFollowees(testUserA);
+        verify(mockMessageLog).getTimeLine(timeLineArg);
     }
 }

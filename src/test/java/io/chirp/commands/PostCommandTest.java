@@ -23,11 +23,12 @@ public class PostCommandTest
     @Test
     public void testPostCommand()
     {
-        User testUserA = new User("testUserA");
+        String testUsernameA = "testUserA";
+        User testUserA = new User(testUsernameA);
         String testMessageContent = "a long long message";
         Message similarMessage = new Message(testUserA, testMessageContent);
 
-        PostCommand postCommand = new PostCommand("testUserA", testMessageContent);
+        PostCommand postCommand = new PostCommand(testUsernameA, testMessageContent);
         App theApp = new App();
 
         //mock userManagement and messageLog
@@ -36,10 +37,11 @@ public class PostCommandTest
         theApp.setUserManagement(mockManagement);
         theApp.setMessageLog(mockMessageLog);
         //stub some methods
-        (when(mockManagement.getOrCreate(testUserA.getUsername()))).thenReturn(testUserA);
+        (when(mockManagement.getOrCreate(testUsernameA))).thenReturn(testUserA);
         Mockito.doNothing().when(mockMessageLog).addMessage(any(Message.class));
 
         postCommand.execute(theApp);
+        verify(mockManagement).getOrCreate(testUsernameA);
         ArgumentCaptor<Message> argument = ArgumentCaptor.forClass(Message.class);
         verify(mockMessageLog).addMessage(argument.capture());
         Assert.assertEquals(similarMessage.getUser(), argument.getValue().getUser());

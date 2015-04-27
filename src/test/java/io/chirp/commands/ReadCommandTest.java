@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -23,13 +24,14 @@ public class ReadCommandTest
     @Test
     public void testReadCommand()
     {
-        User testUserA = new User("testUserA");
+        String testUsernameA = "testUserA";
+        User testUserA = new User(testUsernameA);
         Set<User> testUserSet = new HashSet<>();
         testUserSet.add(testUserA);
         Message testMessage = new Message(testUserA, "a message");
         List<Message> testMessages = Arrays.asList(testMessage);
 
-        ReadCommand readCommand = new ReadCommand("testUserA");
+        ReadCommand readCommand = new ReadCommand(testUsernameA);
         App theApp = new App();
 
         //mock userManagement and messageLog
@@ -38,9 +40,11 @@ public class ReadCommandTest
         theApp.setUserManagement(mockManagement);
         theApp.setMessageLog(mockMessageLog);
         //stub some methods
-        (when(mockManagement.getOrCreate(testUserA.getUsername()))).thenReturn(testUserA);
+        (when(mockManagement.getOrCreate(testUsernameA))).thenReturn(testUserA);
         (when(mockMessageLog.getTimeLine(testUserSet))).thenReturn(testMessages);
 
         readCommand.execute(theApp);
+        verify(mockManagement).getOrCreate(testUsernameA);
+        verify(mockMessageLog).getTimeLine(testUserSet);
     }
 }

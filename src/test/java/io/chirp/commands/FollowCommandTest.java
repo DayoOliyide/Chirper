@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -18,21 +19,25 @@ public class FollowCommandTest
     @Test
     public void testFollowCommand()
     {
-        User testUserA = new User("testUserA");
-        User testUserB = new User("testUserB");
+        String testUsernameA = "testUserA";
+        User testUserA = new User(testUsernameA);
+        String testUsernameB = "testUserB";
+        User testUserB = new User(testUsernameB);
 
-        FollowCommand followCommand = new FollowCommand("testUserA", "testUserB");
+        FollowCommand followCommand = new FollowCommand(testUsernameA, testUsernameB);
         App theApp = new App();
 
         //mock userManagement
         UserManagement mockManagement = mock(UserManagement.class);
         theApp.setUserManagement(mockManagement);
         //stub some methods
-        (when(mockManagement.getOrCreate(testUserA.getUsername()))).thenReturn(testUserA);
-        (when(mockManagement.getOrCreate(testUserB.getUsername()))).thenReturn(testUserB);
+        (when(mockManagement.getOrCreate(testUsernameA))).thenReturn(testUserA);
+        (when(mockManagement.getOrCreate(testUsernameB))).thenReturn(testUserB);
         Mockito.doNothing().when(mockManagement).follows(testUserA, testUserB);
 
         followCommand.execute(theApp);
-
+        verify(mockManagement).getOrCreate(testUsernameA);
+        verify(mockManagement).getOrCreate(testUsernameB);
+        verify(mockManagement).follows(testUserA, testUserB);
     }
 }
